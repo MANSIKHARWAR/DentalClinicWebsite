@@ -1,0 +1,1870 @@
+   
+        /* --- DESIGN SYSTEM & CSS VARIABLES --- */
+        :root {
+            --primary-teal: #008080;
+            --primary-dark: #005a5a;
+            --mint-light: #e6f2f2;
+            --mint-accent: #20b2aa;
+            --text-dark: #2c3e50;
+            --text-muted: #607d8b;
+            --pure-white: #ffffff;
+            --bg-light: #f8fbfb;
+            --accent-coral: #ff6b6b;
+            --shadow-sm: 0 2px 5px rgba(0,0,0,0.05);
+            --shadow-md: 0 5px 15px rgba(0,0,0,0.08);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        /* --- CSS RESET --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- GLOBAL COMPONENTS --- */
+        .section-padding {
+            padding: 80px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-teal);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--mint-accent);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-teal);
+            color: var(--pure-white);
+            box-shadow: 0 4px 10px rgba(0, 128, 128, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-teal);
+            border: 2px solid var(--primary-teal);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-teal);
+            color: var(--pure-white);
+        }
+
+        /* --- TOP EMERGENCY ANNOUNCEMENT BAR --- */
+       /* ========================================================
+   UNIVERSAL RESPONSIVE TOP BAR MASTER ENGINE
+   ======================================================== */
+
+/* 1. DEFAULT BASE STYLES (Targeting Large Desktops > 1024px) */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #004d4d; /* Deep premium clinical teal */
+    color: #ffffff;
+    padding: 12px 8%; /* Comfortable default breathing room padding */
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.top-bar-info {
+    display: flex;
+    gap: 24px; /* Distinct spacing between address and phone layout blocks */
+}
+
+.top-bar span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap; /* Prevents words from breaking onto secondary lines */
+}
+
+.top-bar i {
+    color: #20b2aa; /* Light turquoise highlight accent for icons */
+    font-size: 0.95rem;
+}
+
+/* 2. MEDIUM SCREEN ADAPTATION (Targeting Tablet Size: 768px to 1024px) */
+@media (max-width: 1024px) {
+    .top-bar {
+        padding: 10px 4%; /* Pulls items outward to gain screen space */
+        font-size: 0.82rem; /* Minor typography downscale for seamless reading fit */
+    }
+    
+    .top-bar-info {
+        gap: 16px; /* Tightens gap spacing slightly */
+    }
+}
+
+/* 3. SMALL SCREEN ADAPTATION (Targeting Smartphones < 768px) */
+@media (max-width: 768px) {
+    .top-bar {
+        flex-direction: column; /* Converts side-by-side row into an organized vertical stack */
+        justify-content: center;
+        align-items: center;
+        gap: 8px; /* Safe micro gaps separating phone and time metrics */
+        padding: 10px 20px;
+        text-align: center;
+    }
+
+    .top-bar-info {
+        flex-direction: column;
+        gap: 6px;
+        align-items: center;
+    }
+
+    /* Automatically drops the long address line on mobile viewports to prevent layout clutter */
+    .top-bar-info .top-bar-address {
+        display: none !important;
+    }
+}
+
+        /* --- NAV BAR --- */
+/* ========================================================
+   REFACTORED HEADER & NAVBAR MODULE (WITH TABLET FIX)
+   ======================================================== */
+
+header {
+    background-color: var(--pure-white);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%; /* Spaced out beautifully for desktop wide viewports */
+    max-width: 1400px;
+    margin: 0 auto;
+    transition: padding 0.3s ease;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo i {
+    font-size: 2.2rem;
+    color: var(--primary-teal);
+    transition: font-size 0.3s ease;
+}
+
+.logo-text h1 {
+    font-size: 1.4rem;
+    color: var(--primary-teal);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+    transition: font-size 0.3s ease;
+}
+
+.logo-text span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    display: block;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px; /* Spacious link gaps for desktop screens */
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    transition: gap 0.3s ease;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: var(--transition);
+    white-space: nowrap; /* Forces link text to remain cleanly on one line */
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-teal);
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--primary-teal);
+}
+
+/* ========================================================
+   FIXED TABLET MEDIA QUERY RESPONSIVE ENGINE (768px to 1024px)
+   ======================================================== */
+@media (max-width: 1024px) and (min-width: 768px) {
+    .navbar {
+        padding: 15px 4%; /* Widens horizontal container edges to claim screen room */
+    }
+
+    .logo i {
+        font-size: 1.9rem; /* Slightly scales down icon branding weight */
+    }
+
+    .logo-text h1 {
+        font-size: 1.15rem; /* Downscales text footprint size to prevent menu wrapping */
+    }
+
+    .logo-text span {
+        font-size: 0.72rem;
+    }
+
+    .nav-menu {
+        gap: 14px; /* Safely packs link components closer together horizontally */
+    }
+
+    .nav-link {
+        font-size: 0.85rem; /* Scales font size down so it fits across standard tablet grids */
+    }
+    
+    /* If your "Book Appointment" button sits inside a list item here, scale it down comfortably */
+    .nav-menu .btn {
+        padding: 8px 14px !important;
+        font-size: 0.85rem !important;
+    }
+}
+
+/* ========================================================
+   SMARTPHONE DRAWER FALLBACK TRIGGER (< 768px) */
+@media (max-width: 767px) {
+    .hamburger {
+        display: block; /* Turns on mobile hamburger click icon */
+        z-index: 1002;  /* Keeps icon layered safely above the modal card */
+    }
+    
+    .navbar {
+        padding: 15px 20px;
+        position: relative;
+    }
+
+    /* Converts nav menu links into a centralized floating dashboard overlay card */
+    .nav-menu {
+        position: fixed;
+        
+        /* --- PERFECT CENTRAL COORD LOCKS --- */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.9); /* Centers layout perfectly and shrinks slightly for a pop effect */
+        
+        width: calc(100% - 40px); /* Leaves a clean 20px boundary gap around phone edges */
+        max-width: 320px; /* Keeps card compact on larger phones */
+        height: auto; /* Drops full-height layout down to wrap tightly around content links */
+        max-height: 80vh; /* Prevents overflow clipping on super short screen resolutions */
+        
+        background-color: var(--pure-white);
+        border-radius: 20px; /* Smooth professional curved corners */
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2); /* Deep luxury card depth drop-shadow */
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centers text link elements inside the popup box */
+        justify-content: center;
+        padding: 40px 30px;
+        gap: 22px;
+        
+        /* --- HYPER-SECURE HIDDEN STATE LAYERS --- */
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        
+        /* Transition handles positioning scale pops along with fading states seamlessly */
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    opacity 0.3s ease,
+                    visibility 0.3s ease;
+        z-index: 1001;
+    }
+    
+    /* --- FULLY ENGAGED CENTRAL REVEAL VIEW --- */
+    .nav-menu.active {
+        /* Restores real center position and scales up to 100% size scale simultaneously */
+        transform: translate(-50%, -50%) scale(1); 
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto; /* Fully ready to receive finger gestures clicks */
+    }
+
+    .nav-menu li {
+        width: 100%;
+        text-align: center; /* Centers text strings perfectly across wide columns */
+    }
+
+    .nav-link {
+        font-size: 1.1rem;
+        font-weight: 600;
+        width: 100%;
+        display: block;
+        padding: 8px 0;
+        color: var(--text-dark);
+        transition: color 0.2s ease;
+    }
+    
+    .nav-link:hover,
+    .nav-link.active {
+        color: var(--primary-teal);
+    }
+}
+
+        /* --- HERO SECTION --- */
+        /* --- UPGRADED RIGHT-IMAGE HERO SECTION --- */
+/* --- THE ULTIMATE STACK-SAFE HERO ENGINE --- */
+.hero {
+    display: flex;
+    /* Forces layout elements to stack vertically: Row contents first, Stats Strip second */
+    flex-direction: column; 
+    justify-content: center;
+    background: radial-gradient(circle at 0% 100%, #e6f2f2 0%, rgba(255,255,255,1) 80%);
+    padding: 80px 10% 60px 10%; /* Reduced bottom padding since stats flow naturally now */
+    position: relative;
+    min-height: 90vh;
+    gap: 50px; /* Perfectly gaps the workspace row away from the stats strip below */
+}
+
+/* New structural wrapper keeping your text and image inline on desktop */
+.hero-main-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 50px;
+}
+
+/* Hero text content alignment on the left */
+.hero-content {
+    flex: 1;
+    z-index: 5;
+}
+
+.hero-content .badge {
+    background-color: rgba(0, 128, 128, 0.08);
+    color: var(--primary-teal);
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(0, 128, 128, 0.1);
+}
+
+.hero-content h2 {
+    font-size: 3.2rem;
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin-bottom: 20px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.hero-content h2 span {
+    color: var(--primary-teal);
+    position: relative;
+}
+
+.hero-content p {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    margin-bottom: 35px;
+    line-height: 1.6;
+}
+
+.hero-content p strong {
+    color: var(--primary-dark);
+}
+
+.hero-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Container framing your banner image nicely on the right */
+.hero-image-container {
+    flex: 1.2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+.hero-banner-wrapper {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 128, 128, 0.15);
+    border: 1px solid rgba(0, 128, 128, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.hero-banner-wrapper:hover {
+    transform: translateY(-5px);
+}
+
+.clinic-banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* --- FIXED STATS STRIP (NOW 100% VISIBLE & LAYERED IN FRONT) --- */
+.stats-strip {
+    /* FIX: Changed from absolute to relative to keep it in the natural rendering document flow */
+    position: relative; 
+    width: 100%;
+    background: rgba(255, 255, 255, 0.9); /* Enhanced visibility alpha */
+    backdrop-filter: blur(20px); 
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 25px 40px;
+    
+    /* Stronger explicit shadow architecture to pop out from background layers */
+    box-shadow: 0 20px 40px rgba(0, 70, 70, 0.12), 
+                0 1px 3px rgba(0, 0, 0, 0.02);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    
+    /* FIX: Elevated z-index layer explicitly safely above any rolling sliders */
+    z-index: 99; 
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stats-strip:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 50px rgba(0, 70, 70, 0.18);
+}
+
+/* --- INDIVIDUAL STAT ITEM BOXES --- */
+.stat-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px; 
+    position: relative;
+    padding: 10px 0;
+}
+
+/* Elegant line dividers between metrics */
+.stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -15px;
+    top: 15%;
+    width: 1px;
+    height: 70%;
+    background: linear-gradient(to bottom, transparent, rgba(0, 128, 128, 0.2), transparent);
+}
+
+.stat-meta {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.stat-item h3 {
+    font-size: 2rem;
+    color: var(--primary-teal);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    margin: 0; /* Clean header reset */
+}
+
+.stat-item p {
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    font-weight: 600;
+    opacity: 0.85;
+    margin: 4px 0 0 0; /* Clean paragraph spacing reset */
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(32, 178, 170, 0.12);
+    color: var(--primary-teal);
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover .stat-icon {
+    transform: scale(1.1) rotate(5deg);
+    background-color: var(--primary-teal);
+    color: var(--pure-white);
+}
+
+/* --- MOBILE RESPONSIVENESS OVERRIDES --- */
+@media (max-width: 992px) {
+    .hero {
+        padding: 60px 6% 30px 6%;
+        gap: 35px;
+    }
+
+    /* Stacks text underneath the image beautifully on small touch viewports */
+    .hero-main-row {
+        flex-direction: column-reverse;
+        gap: 35px;
+    }
+
+    .stats-strip {
+        margin: 10px auto 0 auto;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        padding: 20px;
+        background: var(--pure-white);
+    }
+
+    .stat-item {
+        justify-content: flex-start;
+        padding: 12px 20px;
+        background: var(--bg-light);
+        border-radius: 14px;
+    }
+
+    .stat-item:not(:last-child)::after {
+        display: none;
+    }
+}
+
+        /* --- DOCTORS / ABOUT SECTION --- */
+    /* --- PREMIUM DOCTOR CARDS UPGRADE --- */
+/* =========================
+   COMPACT DOCTOR SECTION
+========================= */
+
+.about-section {
+    background: #f8fbff;
+    padding: 80px 6%;
+}
+
+.about-heading {
+    text-align: center;
+    max-width: 700px;
+    margin: auto;
+    margin-bottom: 45px;
+}
+
+.section-title {
+    font-size: 34px;
+    margin-bottom: 12px;
+}
+
+.section-subtitle {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #666;
+}
+
+/* GRID */
+.doctors-grid {
+    display: grid;
+    /* Changed minmax slightly to give cards a bit more breathing room */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 20px; /* Increased slightly for a cleaner look */
+    align-items: stretch; /* Crucial: Forces all grid items to stretch to the same height */
+}
+
+/* CARD */
+.doctor-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    transition: 0.3s ease;
+    width: 100%;
+    max-width: 450px;
+    margin: auto;
+    
+    /* Crucial fixes for uniform size */
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+}
+
+.doctor-card:hover {
+    transform: translateY(-5px);
+}
+
+.premium-highlight {
+    border: 1.5px solid #0b84c6;
+}
+
+/* IMAGE */
+.doctor-image {
+    height: 240px;
+    overflow: hidden;
+    flex-shrink: 0; /* Prevents the image from squishing */
+}
+
+.doctor-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* CONTENT */
+.doctor-content {
+    padding: 22px;
+    /* Crucial fixes for uniform layout */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Pushes the card content to fill any empty space remaining */
+}
+
+/* Align badges correctly */
+.badge-container {
+    display: flex;
+    margin-bottom: 14px;
+}
+
+.doctor-badge {
+    background: #0b84c6;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 25px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.academic-badge {
+    background: linear-gradient(135deg, #00a8ff, #005bea);
+}
+
+.doctor-content h3 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: #111;
+}
+
+.doc-designation {
+    color: #0b84c6;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.doc-hospital-history {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 14px;
+}
+
+.doc-description {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 18px;
+    flex-grow: 1; /* Absorbs extra space so the features tags below always line up perfectly */
+}
+
+/* FEATURES */
+.doc-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto; /* Ensures tags stick to the very bottom of the card content */
+}
+
+.feature-tag {
+    background: #eef7fc;
+    color: #0b84c6;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 28px;
+    }
+
+    .doctor-image {
+        height: 210px;
+    }
+}
+      /* --- PREMIUM SERVICES SECTION DESIGN --- */
+.services {
+    background-color: var(--bg-light, #f8fbfb);
+    padding: 80px 10%;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 45px;
+}
+
+.service-card {
+    background: var(--pure-white, #ffffff);
+    border-radius: 20px;
+    padding: 40px 30px;
+    border: 1px solid rgba(0, 128, 128, 0.04);
+    box-shadow: 0 10px 30px rgba(0, 50, 50, 0.02);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Subtle graphic pop for the highly-requested Premium Crowns section */
+.service-card.highlighted-service {
+    border: 1px solid rgba(32, 178, 170, 0.25);
+    box-shadow: 0 15px 35px rgba(0, 80, 80, 0.05);
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0, 70, 70, 0.1);
+}
+
+/* Iconic Badge Style */
+.service-icon {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(32, 178, 170, 0.08);
+    color: var(--primary-teal, #008080);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    background-color: var(--primary-teal, #008080);
+    color: var(--pure-white, #ffffff);
+    transform: scale(1.05);
+}
+
+.service-card h3 {
+    font-size: 1.4rem;
+    color: var(--text-dark, #222222);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+/* Short patient-focused benefits label */
+.service-tagline {
+    font-size: 0.85rem;
+    color: var(--primary-teal, #008080);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 15px;
+}
+
+.service-desc {
+    color: var(--text-muted, #666666);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: justify;
+    flex-grow: 1; /* Aligns bullet groups evenly across the row */
+}
+
+/* High-value quick list metrics */
+.service-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid rgba(0, 128, 128, 0.06);
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.service-bullets li {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-dark, #333333);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.service-bullets li i {
+    color: var(--mint-accent, #20b2aa);
+    font-size: 1rem;
+}
+
+/* --- MOBILE PLATFORM ADJUSTMENTS --- */
+@media (max-width: 768px) {
+    .services {
+        padding: 60px 5%;
+    }
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .service-card {
+        padding: 30px 20px;
+    }
+}
+ /* =========================
+   GALLERY SECTION
+========================= */
+
+.gallery {
+    background: #f8fbff;
+}
+
+.gallery-heading {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-tag {
+    display: inline-block;
+    background: #dff4ff;
+    color: #0a84c6;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.gallery-filter {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 45px;
+}
+
+.filter-btn {
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: #0a84c6;
+    color: white;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    gap: 28px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    height: 320px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.85),
+        rgba(0,0,0,0.2)
+    );
+
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 25px;
+}
+
+.gallery-overlay h4 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.gallery-overlay p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* =========================
+   TESTIMONIALS
+========================= */
+
+.testimonial-section {
+    padding: 100px 8%;
+    background: white;
+}
+
+.testimonial-heading {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    gap: 30px;
+}
+
+.testimonial-card {
+    background: #f8fbff;
+    padding: 35px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    transition: 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-8px);
+}
+
+.review-stars {
+    font-size: 20px;
+    margin-bottom: 18px;
+}
+
+.testimonial-card p {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.review-user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.review-user img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.review-user h4 {
+    margin-bottom: 4px;
+    color: #222;
+}
+
+.review-user span {
+    font-size: 14px;
+    color: #777;
+}
+
+        /* --- REVIEWS / TESTIMONIALS --- */
+       /* --- PREMIUM REVIEWS ENGINE STYLING --- */
+.reviews {
+    background: #ffffff;
+    overflow: hidden;
+    padding: 80px 0; /* Clear horizontal edge space for container edge fading */
+}
+
+.reviews-header-container {
+    padding: 0 10%;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* --- BRAND TRUST BADGE ELEMENT --- */
+.google-trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8fafc;
+    padding: 10px 24px;
+    border-radius: 50px;
+    margin-top: 15px;
+    border: 1px solid rgba(0, 128, 128, 0.08);
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.google-trust-badge font-size { font-size: 1.1rem; }
+.g-letter { color: #4285F4; } .o1 { color: #EA4335; } .o2 { color: #FBBC05; }
+.g2 { color: #4285F4; }       .l { color: #34A853; }  .e { color: #EA4335; }
+
+.badge-rating {
+    color: #FFB000;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 5px;
+}
+.badge-count {
+    color: var(--text-muted, #666);
+    font-size: 0.88rem;
+    font-weight: 500;
+}
+
+/* --- INFINITE TRACK VIEWPORT --- */
+.reviews-slider-viewport {
+    width: 100%;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+/* Creates soft visual edge gradient blurs so reviews dynamically fade in and out */
+.reviews-slider-viewport::before,
+.reviews-slider-viewport::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 15%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+.reviews-slider-viewport::before {
+    left: 0;
+    background: linear-gradient(to right, #ffffff, transparent);
+}
+.reviews-slider-viewport::after {
+    right: 0;
+    background: linear-gradient(to left, #ffffff, transparent);
+}
+
+/* --- THE RUNNING ENGINE TRACK --- */
+.reviews-marquee-track {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+    animation: smoothScrollMarquee 35s linear infinite;
+}
+
+/* Pause the animation nicely on desktop hover to allow patient reading time */
+.reviews-marquee-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes smoothScrollMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 15px)); }
+}
+
+/* --- PREMIUM INDIVIDUAL CARDS CHASSIS --- */
+.review-card {
+    background: #fdfefe;
+    border-radius: 20px;
+    padding: 35px;
+    width: 380px; /* Locked explicit card profile sizing for the track architecture */
+    flex-shrink: 0;
+    border: 1px solid rgba(0, 128, 128, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 60, 60, 0.03);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+    border-color: rgba(32, 178, 170, 0.3);
+    box-shadow: 0 15px 40px rgba(0, 80, 80, 0.08);
+}
+
+.card-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.stars {
+    color: #FFB000;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+}
+
+.quote-icon {
+    color: rgba(32, 178, 170, 0.15);
+    font-size: 1.5rem;
+}
+
+.review-text {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--text-dark, #333333);
+    font-style: italic;
+    margin-bottom: 25px;
+    text-align: justify;
+}
+
+/* Reviewer Meta Profiles */
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-top: 1px solid rgba(0, 128, 128, 0.06);
+    padding-top: 20px;
+}
+
+.reviewer-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* Distinct matching color palettes for the avatar initials */
+.av-1 { background: linear-gradient(135deg, #008080, #20b2aa); }
+.av-2 { background: linear-gradient(135deg, #1e3a8a, #3b82f6); }
+.av-3 { background: linear-gradient(135deg, #0f766e, #14b8a6); }
+
+.reviewer-details h4 {
+    font-size: 1rem;
+    color: var(--text-dark, #222222);
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.reviewer-details span {
+    font-size: 0.82rem;
+    color: var(--primary-teal, #008080);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* --- MOBILE TRACK ADJUSTMENTS --- */
+@media (max-width: 768px) {
+    .review-card {
+        width: 310px; /* Slightly narrower profile for mobile screen alignments */
+        padding: 25px;
+    }
+    .reviews-marquee-track {
+        animation-duration: 25s; /* Accelerates sliding slightly on short scroll widths */
+    }
+}
+        /* --- CONTACT & LOCATION SECTION --- */
+        .contact {
+            background-color: var(--pure-white);
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info-panel {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info-panel h3 {
+            font-size: 1.8rem;
+            color: var(--primary-teal);
+            margin-bottom: 20px;
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .contact-row i {
+            font-size: 1.2rem;
+            color: var(--primary-teal);
+            background-color: var(--mint-light);
+            padding: 12px;
+            border-radius: 50%;
+        }
+
+        .contact-row h4 {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+
+        .contact-row p, .contact-row a {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+
+        .map-wrapper {
+            flex: 1.2;
+            min-width: 300px;
+            height: 400px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 4px solid var(--pure-white);
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* --- MODERN FOOTER --- */
+        footer {
+            background-color: #1a3030;
+            color: rgba(255,255,255,0.8);
+            padding: 60px 10% 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo h2 {
+            color: var(--pure-white);
+            margin-bottom: 15px;
+        }
+
+        .footer-logo p {
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255,255,255,0.08);
+            color: var(--pure-white);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-teal);
+            transform: translateY(-3px);
+        }
+
+        .footer-box h3 {
+            color: var(--pure-white);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .footer-box h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 35px;
+            height: 3px;
+            background-color: var(--mint-accent);
+        }
+
+        .footer-box ul {
+            list-style: none;
+        }
+
+        .footer-box ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-box ul li a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .footer-box ul li a:hover {
+            color: var(--mint-accent);
+            padding-left: 5px;
+        }
+
+        .timing-list li {
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px !important;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* --- APPOINTMENT MODAL ENGINE --- */
+        /* ========================================================
+   PREMIUM CLINICAL APPOINTMENT MODAL ARCHITECTURE
+   ======================================================== */
+
+/* --- SYSTEM LIGHTBOX BACKDROP OVERLAY --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 32, 32, 0.6); /* Deeper dark teal overlay depth */
+    backdrop-filter: blur(12px); /* Smooth frosted glass separation */
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 99999; /* Forces frontmost visual rendering priority */
+    display: none; /* Controlled explicitly via .active / .open state toggles */
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Force-reveal mechanics called instantly by the JS toggles */
+.modal-overlay.active,
+.modal-overlay.open {
+    display: flex !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* --- STRUCTURE CENTRALIZED WORKSPACE CARD --- */
+.modal-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 500px; /* Reduced from 680px to make it perfectly small and compact */
+    border-radius: 24px; 
+    box-shadow: 0 35px 80px -15px rgba(0, 40, 40, 0.35),
+                0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    position: relative;
+    overflow: hidden;
+    transform: translateY(40px) scale(0.96);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.active .modal-card,
+.modal-overlay.open .modal-card {
+    transform: translateY(0) scale(1);
+}
+
+/* --- BRANDED EDITORIAL HEADER PANEL --- */
+.modal-header {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    padding: 25px 30px 18px 30px; /* Reduced internal padding */
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.modal-header h3 {
+    font-size: 1.4rem; /* Slightly smaller typography header */
+    color: #0f172a;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+}
+
+.modal-header p {
+    font-size: 0.88rem; /* Clean text downscale */
+    color: #475569;
+    line-height: 1.4;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* --- SLEEK MODAL FORM CORE --- */
+.modal-form {
+    padding: 25px 30px 30px 30px; /* Tailored snug spacing layout */
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Tighter input spacing rows */
+}
+
+/* Reduces input heights slightly for a compact look */
+.input-group input,
+.input-group select,
+.input-group textarea {
+    padding: 11px 15px; 
+    font-size: 0.95rem;
+}
+
+/* Reduces action button layout profile */
+.btn-submit-booking {
+    padding: 15px;
+    font-size: 1rem;
+    margin-top: 4px;
+}
+/* Rounded Minimalist Close Trigger Component */
+.close-modal-btn {
+    background: #f1f5f9;
+    border: none;
+    font-size: 1.6rem;
+    color: #64748b;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    line-height: 1;
+}
+
+.close-modal-btn:hover {
+    background-color: #fee2e2;
+    color: #ef4444;
+    transform: rotate(90deg);
+}
+
+/* --- THE MODAL DATA INPUTS WORKSPACE --- */
+.modal-form {
+    padding: 35px 40px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px; /* Uniform breathing room space elements */
+}
+
+/* Split Form Row Layout Architecture */
+.form-row-split {
+    display: flex;
+    gap: 24px;
+}
+
+.input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Bold Interactive Form Labels */
+.input-group label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #334155;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: -0.1px;
+}
+
+.input-group label i {
+    color: #008080; /* Branded Clinical Teal Primary Accent */
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+/* --- RIGID INPUT FIELD STYLINGS --- */
+.input-group input,
+.input-group select,
+.input-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 0.98rem;
+    border-radius: 12px;
+    border: 1.5px solid #cbd5e1;
+    background-color: #f8fafc;
+    color: #0f172a;
+    font-family: inherit;
+    transition: all 0.25s ease;
+    box-sizing: border-box;
+}
+
+/* Remove default dropdown styling arrows for modern native aesthetics override */
+.input-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 18px center;
+    background-size: 14px;
+    padding-right: 45px;
+}
+
+/* --- HIGH FIDELITY FOCUS STATES --- */
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+    outline: none;
+    border-color: #008080;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(0, 128, 128, 0.12);
+}
+
+/* Micro-interaction placeholder states coloring adjustments */
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+    color: #94a3b8;
+}
+
+/* Fixed Textarea Height constraints formatting */
+.input-group textarea {
+    resize: none;
+    min-height: 90px;
+    line-height: 1.5;
+}
+
+/* --- ENGINE ACTION SUBMIT ENTRY BUTTON --- */
+.btn-submit-booking {
+    width: 100%;
+    background-color: #008080;
+    color: #ffffff;
+    border: none;
+    padding: 18px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 10px 28px rgba(0, 128, 128, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-top: 8px;
+}
+
+.btn-submit-booking:hover {
+    background-color: #006666;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 35px rgba(0, 128, 128, 0.35);
+}
+
+.btn-submit-booking:active {
+    transform: translateY(0);
+}
+
+.btn-submit-booking:disabled {
+    background-color: #94a3b8;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* Dynamic Core Spinner Engine Alignment */
+.form-loading-spinner {
+    width: 22px;
+    height: 22px;
+    border: 3.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #ffffff;
+    animation: spinModalLoader 0.75s infinite linear;
+}
+@keyframes spinModalLoader { to { transform: rotate(360deg); } }
+
+/* --- ASYNC OVERLAY INTERACTION DATA SUCCESS PANEL --- */
+.form-success-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+    box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.05);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Success entry dynamic state switch styling toggle class */
+.form-success-overlay.triggered {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background-color: rgba(32, 178, 170, 0.12);
+    color: #008080;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    margin-bottom: 24px;
+    animation: popSuccessPulse 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+@keyframes popSuccessPulse { 
+    0% { transform: scale(0.6); opacity: 0; } 
+    100% { transform: scale(1); opacity: 1; } 
+}
+
+.form-success-overlay h4 {
+    font-size: 1.5rem;
+    color: #0f172a;
+    font-weight: 800;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+}
+
+.form-success-overlay p {
+    font-size: 1rem;
+    color: #475569;
+    line-height: 1.6;
+    max-width: 460px;
+    margin-bottom: 35px;
+}
+
+/* Success Overlay Resolution Close Action Button Element Layout */
+.btn-success-close {
+    background-color: #f1f5f9;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+    padding: 14px 35px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-success-close:hover {
+    background-color: #e2e8f0;
+    color: #0f172a;
+    border-color: #94a3b8;
+}
+
+/* ========================================================
+   RESPONSIVE LAYOUT ENGINE FOR PORTABLE DEVICES
+   ======================================================== */
+@media (max-width: 768px) {
+    .modal-overlay {
+        padding: 16px;
+    }
+    
+    .modal-card {
+        border-radius: 24px;
+        max-height: 92vh;
+        overflow-y: auto; /* Adds fallback scrolling engine loops for compact mobile viewports */
+    }
+
+    .form-row-split {
+        flex-direction: column; /* Collapses dual column inputs down cleanly into rows on mobile sizes */
+        gap: 22px;
+    }
+
+    .modal-header {
+        padding: 25px 24px 20px 24px;
+    }
+    
+    .modal-form {
+        padding: 25px 24px 30px 24px;
+        gap: 20px;
+    }
+
+    .modal-header h3 {
+        font-size: 1.4rem;
+    }
+    
+    .btn-submit-booking {
+        padding: 16px;
+        font-size: 1.05rem;
+    }
+}
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 992px) {
+            .section-padding { padding: 60px 5%; }
+            .hero { flex-direction: column; text-align: center; padding-top: 40px; }
+            .hero-content { padding-right: 0; margin-bottom: 40px; }
+            .hero-content h2 { font-size: 2.5rem; }
+            .hero-actions { justify-content: center; }
+            .stats-strip { position: static; margin: 30px auto 0; width: 100%; }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { display: none; }
+            .hamburger { display: block; }
+            .nav-menu {
+                position: fixed;
+                top: 75px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 75px);
+                background-color: var(--pure-white);
+                flex-direction: column;
+                padding: 40px 0;
+                gap: 25px;
+                transition: var(--transition);
+                box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+            }
+            .nav-menu.active { left: 0; }
+            .contact-container { flex-direction: column; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+        }
+
+        /* --- FLOATING ACTION BUTTONS ENGINE --- */
+.fab-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 99999; /* Ensures it stays on top of all other elements */
+}
+
+.fab-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 24px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fab-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Specific button colors */
+.fab-btn.whatsapp {
+    background-color: #25d366; /* Official WhatsApp Green */
+}
+
+.fab-btn.call {
+    background-color: #008080; /* Your Clinic Primary Teal */
+}
+
+/* --- MOBILE OPTIMIZATION --- */
+@media (max-width: 767px) {
+    .fab-container {
+        bottom: 20px;
+        right: 20px;
+        gap: 10px;
+    }
+    .fab-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
+    
